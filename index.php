@@ -1,34 +1,19 @@
 <?php
 
-    $book_title = filter_input(INPUT_POST, "title");
     $book_isbn = filter_input(INPUT_POST, "isbn");
 
     $parent = filter_input(INPUT_POST, "parent");
 
     $fp = fopen("book.json", "r+");
-    $json = json_decode(fread($fp, filesize("book.json")), true);
-    var_dump($json);
+    $json = (array)json_decode(fread($fp, filesize("book.json")), true);
     fclose($fp);
 
-    if ($book_title && $book_isbn) {
-        $data = [];
-        $data["id"] = md5($book_title . $book_isbn);
-        $data["title"] = $book_title;
-        $data["isbn"] = $book_isbn;
-
-        $ids = array_map(
-            function ($datum) {
-                return $datum["id"];
-            }, $json
-        );
-        if ($parent !== null && in_array($parent, $ids, true)) {
-            $data["parent"] = $parent;
-        }
-
-        $fp = fopen("book.json", "w");
-        fwrite($fp, json_encode(array_merge($json, $data)));
-        fclose($fp);
+    if($book_isbn){
+        preg_replace("/[^\d]/","",$book_isbn);
+        $xmldata = simplexml_load_file(file_get_contents("http://iss.ndl.go.jp/api/sru?operation=searchRetrieve&query=isbn=4004309352"));
+        var_dump($xmldata);
     }
+
 ?>
 <!DOCTYPE html>
 <html lang="ja">
