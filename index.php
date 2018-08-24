@@ -8,10 +8,14 @@
     $json = (array)json_decode(fread($fp, filesize("book.json")), true);
     fclose($fp);
 
-    if($book_isbn){
-        preg_replace("/[^\d]/","",$book_isbn);
-        $xmldata = simplexml_load_file(file_get_contents("http://iss.ndl.go.jp/api/sru?operation=searchRetrieve&query=isbn=4004309352"));
-        var_dump($xmldata);
+    if ($book_isbn) {
+        $book_isbn = preg_replace("/[^\d]/", "", $book_isbn);
+        var_dump($book_isbn);
+        $xml = new SimpleXMLElement(
+            file_get_contents("http://iss.ndl.go.jp/api/sru?operation=searchRetrieve&query=isbn=$book_isbn")
+        );
+
+        var_dump($xml);
     }
 
 ?>
@@ -23,11 +27,6 @@
 </head>
 <body>
 <form method="post" action="">
-    <p>
-        <label>
-            タイトル: <input type="text" name="title">
-        </label>
-    </p>
     <p>
         <label>
             ISBN: <input type="text" name="isbn">
