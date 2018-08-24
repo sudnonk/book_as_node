@@ -15,7 +15,7 @@
             file_get_contents("http://iss.ndl.go.jp/api/sru?operation=searchRetrieve&query=isbn=$book_isbn")
         );
 
-        var_dump($xml);
+        var_dump($xml->records->record);
     }
 
 ?>
