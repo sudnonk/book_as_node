@@ -18,7 +18,7 @@
         $response = curl_exec($curl);
         curl_close($curl);
 
-        print_r(json_decode($response, true));
+        print_r(json_decode($response["summary"], true));
     }
 
 ?>
