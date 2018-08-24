@@ -5,7 +5,7 @@
 
     $parent = filter_input(INPUT_POST, "parent");
 
-    $json = json_decode(file_get_contents("book.json"),true);
+    $json = json_decode(file_get_contents("book.json"), true);
 
     if ($book_title && $book_isbn) {
         $data = [];
@@ -21,6 +21,8 @@
         if ($parent !== null && in_array($parent, $ids, true)) {
             $data["parent"] = $parent;
         }
+
+        file_put_contents("book.json", json_encode(array_merge($json, $data)));
     }
 ?>
 <!DOCTYPE html>
