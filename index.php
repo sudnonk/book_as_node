@@ -5,7 +5,7 @@
 
     $parent = filter_input(INPUT_POST, "parent");
 
-    $json = json_decode(file_get_contents("book.json"));
+    $json = json_decode(file_get_contents("book.json"),true);
 
     if ($book_title && $book_isbn) {
         $data = [];
