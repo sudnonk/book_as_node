@@ -11,11 +11,14 @@
     if ($book_isbn) {
         $book_isbn = preg_replace("/[^\d]/", "", $book_isbn);
         var_dump($book_isbn);
-        $xml = new SimpleXMLElement(
-            file_get_contents("http://iss.ndl.go.jp/api/sru?operation=searchRetrieve&query=isbn=$book_isbn")
-        );
 
-        var_dump($xml->records->record);
+        $curl = curl_init();
+        curl_setopt($curl, CURLOPT_URL, "https://api.openbd.jp/v1/get?isbn=" . $book_isbn);
+        curl_setopt($curl, CURLOPT_RETURNTRANSFER, true);
+        $response = curl_exec($curl);
+        curl_close($curl);
+
+        var_dump(json_decode($response, true));
     }
 
 ?>
