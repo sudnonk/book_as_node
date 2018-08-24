@@ -5,7 +5,9 @@
 
     $parent = filter_input(INPUT_POST, "parent");
 
-    $json = json_decode(file_get_contents("book.json"), true);
+    $fp = fopen("book.json", "r+");
+    $json = json_decode(fread($fp, filesize("book.json")), true);
+    fclose($fp);
 
     if ($book_title && $book_isbn) {
         $data = [];
@@ -22,7 +24,9 @@
             $data["parent"] = $parent;
         }
 
-        file_put_contents("book.json", json_encode(array_merge($json, $data)));
+        fopen("book.json", "w");
+        fwrite($fp, json_encode(array_merge($json, $data)));
+        fclose($fp);
     }
 ?>
 <!DOCTYPE html>
