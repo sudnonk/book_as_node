@@ -19,7 +19,8 @@
         curl_close($curl);
 
         $json = json_decode($response, true);
-        print_r($json["summary"]);
+        print_r($json);
+        print_r($json[0]["summary"]);
     }
 
 ?>
