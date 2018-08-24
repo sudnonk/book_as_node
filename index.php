@@ -7,6 +7,7 @@
 
     $fp = fopen("book.json", "r+");
     $json = json_decode(fread($fp, filesize("book.json")), true);
+    var_dump($json);
     fclose($fp);
 
     if ($book_title && $book_isbn) {
@@ -24,7 +25,7 @@
             $data["parent"] = $parent;
         }
 
-        fopen("book.json", "w");
+        $fp = fopen("book.json", "w");
         fwrite($fp, json_encode(array_merge($json, $data)));
         fclose($fp);
     }
