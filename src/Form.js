@@ -23,6 +23,7 @@ class Form extends Component {
 
 
     onSubmit() {
+        console.log("onsubmit");
         const data = {
             type: this.state.type,
             text: this.state.text,
@@ -61,7 +62,7 @@ class Form extends Component {
 
     render() {
         return (
-            <form onSubmit={this.onSubmit}>
+            <form action="javascript:void(0);" onSubmit={this.onSubmit}>
                 <FormError status={this.state.status}/>
                 <FormType defaultType={this.state.type} defaultText={this.state.text} defaultISBN={this.state.isbn}
                           setType={this.setType} setText={this.setText} setISBN={this.setISBN}/>
