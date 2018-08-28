@@ -189,6 +189,7 @@
          */
         public function getJson(): array {
             if ($json = json_decode($this->json, true)) {
+                var_dump($json);
                 return $json;
             } else {
                 return [];
