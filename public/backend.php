@@ -286,7 +286,9 @@
          * ファイルロックを外し、ストリームを閉じる
          */
         public function __destruct() {
-            flock($this->fp, LOCK_UN);
-            fclose($this->fp);
+            if ($this->fp) {
+                flock($this->fp, LOCK_UN);
+                fclose($this->fp);
+            }
         }
     }
