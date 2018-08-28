@@ -5,7 +5,7 @@ class FormError extends Component {
     //コンストラクタ。props - 親から渡される情報
     constructor(props) {
         super(props);
-
+        console.log(this.props.status);
         this.state = this.props.status;
     }
 
@@ -13,7 +13,11 @@ class FormError extends Component {
         if (this.state === null) {
             return <br/>;
         } else {
-            return <br/>;
+            return (
+                <p>
+                    {this.state.message}
+                </p>
+            )
         }
     }
 

@@ -45,7 +45,7 @@ class Form extends Component {
                 return res.json();
             })
             .then(function (json) {
-                console.log(json.status);
+                this.setState({status: json});
             })
             .catch(console.error);
 
