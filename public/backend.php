@@ -44,7 +44,11 @@
             $data["parent"] = $parent;
         }
 
-        $data["ID"] = max($ids) + 1;
+        if (count($ids) === 0) {
+            $data["ID"] = 1;
+        } else {
+            $data["ID"] = max($ids) + 1;
+        }
 
         $json[] = $data;
         $j->setJson($json);
