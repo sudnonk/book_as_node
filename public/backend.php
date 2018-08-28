@@ -187,8 +187,7 @@
             if ($json = json_decode($this->json)) {
                 return $json;
             } else {
-                send("Failed to parse JSON.", 500);
-                exit();
+                return [];
             }
         }
 
