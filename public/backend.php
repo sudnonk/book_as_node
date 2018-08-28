@@ -1,53 +1,62 @@
 <?php
+    if ($_SERVER["REQUEST_METHOD"] === "POST") {
+        $type = filter_input(INPUT_POST, "type");
+        $text = filter_input(INPUT_POST, "text");
+        $isbn = filter_input(INPUT_POST, "isbn");
+        $parent = filter_input(INPUT_POST, "parent");
 
-    $type = filter_input(INPUT_POST, "type");
-    $text = filter_input(INPUT_POST, "text");
-    $isbn = filter_input(INPUT_POST, "isbn");
-    $parent = filter_input(INPUT_POST, "parent");
-
-    if (!$type) {
-        send("Type is required.", 400);
-    }
-
-    $data = [];
-
-    if ($type === "book") {
-        if (!$isbn) {
-            send("ISBN is required with type book.", 400);
+        if (!$type) {
+            send("Type is required.", 400);
         }
 
-        $isbn = ISBN::normalize_isbn($isbn);
-        ISBN::check_isbn($isbn);
+        $data = [];
 
-        $data["type"] = $type;
-        $data["ISBN"] = $isbn;
-    } elseif ($type === "text") {
-        if (!$text) {
-            send("Text is required with type text.", 400);
+        if ($type === "book") {
+            if (!$isbn) {
+                send("ISBN is required with type book.", 400);
+            }
+
+            $isbn = ISBN::normalize_isbn($isbn);
+            ISBN::check_isbn($isbn);
+
+            $data["type"] = $type;
+            $data["ISBN"] = $isbn;
+        } elseif ($type === "text") {
+            if (!$text) {
+                send("Text is required with type text.", 400);
+            }
+
+            $text = filter_var($text, FILTER_SANITIZE_STRING, FILTER_FLAG_STRIP_LOW | FILTER_FLAG_NO_ENCODE_QUOTES);
+
+            $data["type"] = $type;
+            $data["text"] = $text;
+        } else {
+            send("Type is invalid.", 400);
         }
 
-        $text = filter_var($text, FILTER_SANITIZE_STRING, FILTER_FLAG_STRIP_LOW | FILTER_FLAG_NO_ENCODE_QUOTES);
+        $j = new Json();
+        $json = $j->getJson();
+        $ids = $j->getIDs();
+        if (!in_array($parent, $ids)) {
+            send("Parent ID doesn't exists.", 400);
+        }
 
-        $data["type"] = $type;
-        $data["text"] = $text;
-    } else {
-        send("Type is invalid.", 400);
+        $data["ID"] = max($ids) + 1;
+
+        $json[] = $data;
+        $j->setJson($json);
+        $j->write();
+
+        send("Success!", 200);
+    } elseif ($_SERVER["REQUEST_METHOD"] === "GET") {
+        $j = new Json();
+        $json = $j->getRawJson();
+
+        send($json, 200);
     }
 
-    $j = new Json();
-    $json = $j->getJson();
-    $ids = $j->getIDs();
-    if (!in_array($parent, $ids)) {
-        send("Parent ID doesn't exists.", 400);
-    }
 
-    $data["ID"] = max($ids) + 1;
-
-    $json[] = $data;
-    $j->setJson($json);
-    $j->write();
-
-    send("Success!", 200);
+    send("Bad request.", 400);
 
 
     /**
@@ -152,7 +161,7 @@
     }
 
     class Json {
-        private $json = [];
+        private $json = "";
         private $fp;
         const FILE_NAME = "./book.json";
 
@@ -161,7 +170,7 @@
          */
         public function __construct() {
             $this->read();
-            if (!self::validate($this->json)) {
+            if (!self::validate($this->getJson())) {
                 send("JSON is not valid.", 500);
             }
         }
@@ -172,6 +181,20 @@
          * @return array
          */
         public function getJson(): array {
+            if ($json = json_decode($this->json)) {
+                return $json;
+            } else {
+                send("Failed to parse JSON.", 500);
+                exit();
+            }
+        }
+
+        /**
+         * 生の文字列のJSONを返す
+         *
+         * @return string
+         */
+        public function getRawJson(): string {
             return $this->json;
         }
 
@@ -198,15 +221,14 @@
                 send("Could not lock file.", 500);
             }
 
-            $file = fread($this->fp, filesize(self::FILE_NAME));
-            $this->json = json_decode($file, true);
+            $this->json = fread($this->fp, filesize(self::FILE_NAME));
         }
 
         /**
          * JSONをファイルに書き込む
          */
         public function write() {
-            uasort($this->json, function ($a, $b) {
+            uasort($this->getJson(), function ($a, $b) {
                 if ($a["ID"] === $b["ID"]) {
                     return 0;
                 }
@@ -221,21 +243,31 @@
             }
         }
 
+        /**
+         * JSONに必要な値が入っているかを確認する
+         *
+         * @param array $data
+         * @return bool
+         */
         private static function validate(array $data): bool {
-            if (isset($data["ID"]) && isset($data["type"])) {
-                if ($data["type"] === "book") {
-                    if (isset($data["isbn"])) {
-                        return true;
+            foreach ($data as $datum) {
+                if (isset($datum["ID"]) && isset($datum["type"])) {
+                    if ($datum["type"] === "book") {
+                        if (isset($datum["isbn"])) {
+                            continue;
+                        }
+                    }
+                    if ($datum["type"] === "text") {
+                        if (isset($datum["text"])) {
+                            continue;
+                        }
                     }
                 }
-                if ($data["type"] === "text") {
-                    if (isset($data["text"])) {
-                        return true;
-                    }
-                }
+
+                return false;
             }
 
-            return false;
+            return true;
         }
 
         /**
@@ -244,7 +276,7 @@
         public function getIDs() {
             return array_map(function ($datum) {
                 return $datum["ID"];
-            }, $this->json);
+            }, $this->getJson());
         }
 
         /**
