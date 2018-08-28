@@ -21,3 +21,4 @@ yarn-error.log*
 
 /.idea
 book_as_node.iml
+public/book.json
