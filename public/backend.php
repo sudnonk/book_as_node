@@ -206,7 +206,7 @@
          * @param array $json
          */
         public function setJson(array $json) {
-            $this->json = $json;
+            $this->json = json_encode($json);
         }
 
         /**
