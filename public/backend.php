@@ -189,7 +189,6 @@
          */
         public function getJson(): array {
             if ($json = json_decode($this->json, true)) {
-                var_dump($json);
                 return $json;
             } else {
                 return [];
@@ -246,6 +245,7 @@
 
             $json = json_encode($json);
 
+            rewind($this->fp);
             if (fwrite($this->fp, $json) === false) {
                 send("Could not write file.", 500);
             }
