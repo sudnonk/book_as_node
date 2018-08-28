@@ -22,6 +22,7 @@
             $data["type"] = $type;
             $data["ISBN"] = $isbn;
         } elseif ($type === "text") {
+            var_dump($text);
             if (!$text || !is_string($text) || strlen($text) < 1) {
                 send("Text is required with type text.", 400);
             }
