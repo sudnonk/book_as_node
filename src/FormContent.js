@@ -10,8 +10,8 @@ class FormContent extends Component {
         this.onISBNChange = this.onISBNChange.bind(this);
 
         this.state = {
-            text: this.props.defaultText,
-            isbn: this.props.defaultISBN
+            text: this.props.text,
+            isbn: this.props.ISBN
         };
     }
 
@@ -30,14 +30,14 @@ class FormContent extends Component {
             return (
                 <p>
                     <label htmlFor="isbn">ISBNコード</label><br/>
-                    <input name="isbn" type="text" value={this.state.isbn} onChange={this.onISBNChange}/>
+                    <input name="isbn" type="text" value={this.props.ISBN} onChange={this.onISBNChange}/>
                 </p>
             );
         } else {
             return (
                 <p>
                     <label htmlFor="text">内容</label><br/>
-                    <input name="text" type="text" value={this.state.text} onChange={this.onTextChange}/>
+                    <input name="text" type="text" value={this.props.text} onChange={this.onTextChange}/>
                 </p>
             );
         }

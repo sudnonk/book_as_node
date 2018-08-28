@@ -11,7 +11,7 @@ class FormType extends Component {
         this.setAsBook = this.setAsBook.bind(this);
 
         this.state = {
-            type: this.props.defaultType
+            type: this.props.type
         };
     }
 
@@ -42,8 +42,8 @@ class FormType extends Component {
                                onChange={this.setAsText}/> テキスト
                     </label>
                 </p>
-                <FormContent defaultText={this.props.defaultText} defaultISBN={this.props.defaultISBN}
-                             type={this.state.type} setText={this.props.setText} setISBN={this.props.setISBN}/>
+                <FormContent text={this.props.text} ISBN={this.props.ISBN}
+                             type={this.props.type} setText={this.props.setText} setISBN={this.props.setISBN}/>
             </div>
         );
     }

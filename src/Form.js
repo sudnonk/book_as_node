@@ -74,8 +74,8 @@ class Form extends Component {
         return (
             <form action="javascript:void(0);" onSubmit={this.onSubmit}>
                 <FormError status={this.state.status}/>
-                <FormParent defaultParent={this.state.parent} setParent={this.setParent}/>
-                <FormType defaultType={this.state.type} defaultText={this.state.text} defaultISBN={this.state.isbn}
+                <FormParent parent={this.state.parent} setParent={this.setParent}/>
+                <FormType type={this.state.type} text={this.state.text} ISBN={this.state.isbn}
                           setType={this.setType} setText={this.setText} setISBN={this.setISBN}/>
                 <button type="submit">送信</button>
             </form>
