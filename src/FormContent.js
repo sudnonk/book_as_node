@@ -17,12 +17,12 @@ class FormContent extends Component {
 
     onTextChange(event) {
         this.setState({text: event.target.value});
-        this.props.setText(this.state.text);
+        this.props.setText(event.target.value);
     }
 
     onISBNChange(event) {
         this.setState({isbn: event.target.value});
-        this.props.setISBN(this.state.isbn);
+        this.props.setISBN(event.target.value);
     }
 
     render() {
