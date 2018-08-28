@@ -166,7 +166,7 @@
     class Json {
         private $json = "";
         private $fp;
-        const FILE_NAME = "./book.json";
+        const FILE_NAME = "../book.json";
 
         /**
          * File constructor.
@@ -214,7 +214,7 @@
          * ファイルからJSONを読みだす
          */
         private function read() {
-            $this->fp = fopen(self::FILE_NAME, "r+");
+            $this->fp = fopen(self::FILE_NAME, "c+");
 
             if (!$this->fp) {
                 send("Could not open file.", 500);
