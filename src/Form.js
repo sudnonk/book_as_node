@@ -29,10 +29,10 @@ class Form extends Component {
         const _self = this;
         console.log("onsubmit");
         const data = {
-            type: this.state.type,
-            text: this.state.text,
-            isbn: this.state.isbn,
-            parent: this.state.parent
+            type: this.state.type || "",
+            text: this.state.text || "",
+            isbn: this.state.isbn || "",
+            parent: this.state.parent || ""
         };
         const method = "POST";
         const headers = {
