@@ -230,7 +230,8 @@
          * JSONをファイルに書き込む
          */
         public function write() {
-            uasort($this->getJson(), function ($a, $b) {
+            $json = $this->getJson();
+            uasort($json, function ($a, $b) {
                 if ($a["ID"] === $b["ID"]) {
                     return 0;
                 }
@@ -238,7 +239,7 @@
                 return ($a["ID"] < $b["ID"]) ? -1 : 1;
             });
 
-            $json = json_encode($this->json);
+            $json = json_encode($json);
 
             if (fwrite($this->fp, $json)) {
                 send("Could not write file.", 500);
