@@ -26,6 +26,7 @@ class Form extends Component {
 
 
     onSubmit() {
+        const _self = this;
         console.log("onsubmit");
         const data = {
             type: this.state.type,
@@ -45,7 +46,7 @@ class Form extends Component {
                 return res.json();
             })
             .then(function (json) {
-                this.setState({status: json});
+                _self.setState({status: json});
             })
             .catch(console.error);
 
