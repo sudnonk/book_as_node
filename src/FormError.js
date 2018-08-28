@@ -10,13 +10,13 @@ class FormError extends Component {
     }
 
     render() {
-        console.log(this.state);
+        console.log(this.props.state);
         if (this.state === null) {
             return <br/>;
         } else {
             return (
                 <p>
-                    {this.state.message}
+                    {this.props.state.message}
                 </p>
             )
         }
