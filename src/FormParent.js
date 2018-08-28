@@ -15,14 +15,14 @@ class FormParent extends Component {
 
     onChange(event) {
         this.setState({parent: event.target.value});
-        this.props.setParent(this.state.parent);
+        this.props.setParent(event.target.value);
     }
 
     render() {
         return (
             <p>
                 <label htmlFor="text">親</label><br/>
-                <input name="text" type="text" onChange={this.onChange}/>
+                <input name="text" type="text" value={this.state.parent} onChange={this.onChange}/>
             </p>
         );
     }

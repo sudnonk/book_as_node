@@ -30,14 +30,14 @@ class FormContent extends Component {
             return (
                 <p>
                     <label htmlFor="isbn">ISBNコード</label><br/>
-                    <input name="isbn" type="text" onChange={this.onISBNChange}/>
+                    <input name="isbn" type="text" value={this.state.isbn} onChange={this.onISBNChange}/>
                 </p>
             );
         } else {
             return (
                 <p>
                     <label htmlFor="text">内容</label><br/>
-                    <input name="text" type="text" onChange={this.onTextChange}/>
+                    <input name="text" type="text" value={this.state.text} onChange={this.onTextChange}/>
                 </p>
             );
         }
