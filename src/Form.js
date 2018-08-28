@@ -70,6 +70,7 @@ class Form extends Component {
     }
 
     render() {
+        console.log("render");
         return (
             <form action="javascript:void(0);" onSubmit={this.onSubmit}>
                 <FormError status={this.state.status}/>
