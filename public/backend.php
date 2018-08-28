@@ -245,7 +245,7 @@
 
             $json = json_encode($json);
 
-            if (fwrite($this->fp, $json)) {
+            if (fwrite($this->fp, $json) === false) {
                 send("Could not write file.", 500);
             }
         }
