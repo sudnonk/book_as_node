@@ -184,7 +184,7 @@
          * @return array
          */
         public function getJson(): array {
-            if ($json = json_decode($this->json)) {
+            if ($json = json_decode($this->json, true)) {
                 return $json;
             } else {
                 return [];
