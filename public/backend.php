@@ -37,8 +37,11 @@
         $j = new Json();
         $json = $j->getJson();
         $ids = $j->getIDs();
-        if (!in_array($parent, $ids)) {
-            send("Parent ID doesn't exists.", 400);
+        if ($parent !== null) {
+            if (!in_array($parent, $ids, true)) {
+                send("Parent ID doesn't exists.", 400);
+            }
+            $data["parent"] = $parent;
         }
 
         $data["ID"] = max($ids) + 1;
