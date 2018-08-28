@@ -37,7 +37,7 @@
         $j = new Json();
         $json = $j->getJson();
         $ids = $j->getIDs();
-        if ($parent !== null) {
+        if ($parent && strlen($parent) > 0) {
             if (!in_array($parent, $ids, true)) {
                 send("Parent ID doesn't exists.", 400);
             }
