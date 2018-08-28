@@ -40,7 +40,7 @@ class Form extends Component {
         };
         const body = Object.keys(data).map((key) => key + "=" + encodeURIComponent(data[key])).join("&");
 
-        fetch("./register.php", {method, headers, body})
+        fetch("./backend.php", {method, headers, body})
             .then(function (res) {
                 return res.json();
             })
