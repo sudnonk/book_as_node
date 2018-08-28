@@ -74,7 +74,7 @@
      */
     function send(string $msg, int $status) {
         $json = [
-            "message" => $msg.debug_backtrace()[0]["line"],
+            "message" => $msg,
             "status"  => $status
         ];
         header("content-type: application/json", true, $status);
