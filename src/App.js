@@ -5,6 +5,19 @@ import Form from './Form';
 import BookTree from "./BookTree";
 
 class App extends Component {
+    constructor(){
+        super(props);
+
+        this.onChange = this.onChange.bind(this);
+        this.state.onChange = {
+            isChanged: false
+        };
+    }
+
+    onChange(){
+        this.setState({isChanged: true});
+    }
+
     render() {
         return (
             <div className="App">
@@ -17,7 +30,7 @@ class App extends Component {
                 </p>
                 <BookTree/>
                 <h3>追加</h3>
-                <Form/>
+                <Form onchange={this.onChange}/>
             </div>
         );
     }

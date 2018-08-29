@@ -50,6 +50,7 @@ class Form extends Component {
             })
             .catch(console.error);
 
+        this.props.onchange();
         event.preventDefault();
     }
 
