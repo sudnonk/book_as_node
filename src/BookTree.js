@@ -37,6 +37,7 @@ class BookTree extends Component {
     }
 
     drawTree() {
+        console.log(this.state);
         const svgNode = this.node;
         const _self = this;
 
