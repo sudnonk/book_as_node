@@ -17,17 +17,17 @@ class Form extends Component {
 
         this.state = {
             type: "book",
-            text: null,
-            isbn: null,
+            text: "",
+            isbn: "",
             status: null,
-            parent: null
+            parent: ""
         };
     }
 
 
-    onSubmit() {
+    onSubmit(event) {
         const _self = this;
-        console.log("onsubmit");
+
         const data = {
             type: this.state.type || "",
             text: this.state.text || "",
@@ -50,7 +50,7 @@ class Form extends Component {
             })
             .catch(console.error);
 
-        return false;
+        event.preventDefault();
     }
 
     setType(type) {
@@ -71,12 +71,13 @@ class Form extends Component {
 
     render() {
         console.log(this.state);
+        const _self = this;
         return (
-            <form action="javascript:void(0);" onSubmit={this.onSubmit}>
-                <FormError status={this.state.status}/>
-                <FormParent parent={this.state.parent} setParent={this.setParent}/>
-                <FormType type={this.state.type} text={this.state.text} ISBN={this.state.isbn}
-                          setType={this.setType} setText={this.setText} setISBN={this.setISBN}/>
+            <form onSubmit={_self.onSubmit}>
+                <FormError status={_self.state.status}/>
+                <FormParent parent={_self.state.parent} setParent={_self.setParent}/>
+                <FormType type={_self.state.type} text={_self.state.text} ISBN={_self.state.isbn}
+                          setType={_self.setType} setText={_self.setText} setISBN={_self.setISBN}/>
                 <button type="submit">送信</button>
             </form>
         );
