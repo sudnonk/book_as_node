@@ -1,4 +1,4 @@
-import React, {Component} from 'react'
+import React, {Component} from 'react';
 import * as d3 from 'd3';
 
 class BookTree extends Component {
@@ -30,7 +30,7 @@ class BookTree extends Component {
         fetch("./backend.php").then(function (res) {
             return res.json();
         }).then(function (json) {
-            this.setState({data: json});
+            _self.setState({data: json});
         })
     }
 
@@ -45,6 +45,7 @@ class BookTree extends Component {
         const rectSize = 30;
 
         //データをツリー形式に変換する。この時ノードの相対位置とかも決まる。
+
         const root = d3.hierarchy(data);
         //ツリーを書くグラフ領域を設定
         let tree = d3.tree()
