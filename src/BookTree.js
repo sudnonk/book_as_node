@@ -13,6 +13,7 @@ class BookTree extends Component {
         this.state = {
             data: {}
         };
+        this.fetchData();
     }
 
     //コンポーネントが配置されたときに呼ばれる
@@ -32,6 +33,7 @@ class BookTree extends Component {
         }).then(function (json) {
             _self.setState({data: json});
         })
+            .catch(console.error);
     }
 
     drawTree() {
@@ -46,7 +48,7 @@ class BookTree extends Component {
 
         //データをツリー形式に変換する。この時ノードの相対位置とかも決まる。
 
-        const root = d3.hierarchy(data);
+        const root = d3.hierarchy(_self.state.data);
         //ツリーを書くグラフ領域を設定
         let tree = d3.tree()
             .size([height, width - 200])
