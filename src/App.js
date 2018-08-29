@@ -6,7 +6,7 @@ import BookTree from "./BookTree";
 
 class App extends Component {
     constructor(){
-        super(props);
+        super();
 
         this.onChange = this.onChange.bind(this);
         this.state.onChange = {
