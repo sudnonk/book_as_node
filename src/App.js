@@ -9,7 +9,7 @@ class App extends Component {
         super();
 
         this.onChange = this.onChange.bind(this);
-        this.state.onChange = {
+        this.state = {
             isChanged: false
         };
     }
