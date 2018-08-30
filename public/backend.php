@@ -281,7 +281,7 @@
             }
 
             $file = fread($this->fp, filesize(self::FILE_NAME));
-            $json = json_decode($file);
+            $json = json_decode($file,true);
             if ($json === false || $json === null) {
                 $this->json = [];
             } else {
