@@ -31,9 +31,44 @@ class BookTree extends Component {
         fetch("./backend.php").then(function (res) {
             return res.json();
         }).then(function (json) {
-            _self.setState({data: JSON.parse(json.message)});
+            const data = JSON.parse(json.message);
+            _self.setState({data: _self.arrangeData(data)});
         })
             .catch(console.error);
+    }
+
+    arrangeData(data) {
+        let arrangedData = {
+            name: "invisibleRoot",
+            children: []
+        };
+        let newData = [];
+
+        data.forEach(function (datum) {
+            let newDatum = [];
+            newDatum.name = datum["ID"];
+            newDatum.type = datum["type"];
+            newDatum.parent = datum["parent"] || null;
+            if (newDatum.type === "book") {
+                newDatum.isbn = datum["isbn"];
+            } else {
+                newDatum.text = datum["text"];
+            }
+            newDatum.children = [];
+
+            newData.push(newDatum);
+        });
+
+        newData.forEach(function (datum) {
+            const key = datum.parent;
+            newData.forEach(function (datum2) {
+                if (datum2.name === key) {
+                    datum.children.push(datum2);
+                }
+            })
+        });
+
+        console.log(newData);
     }
 
     drawTree() {
