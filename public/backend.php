@@ -176,7 +176,7 @@
     }
 
     class Json {
-        private $json;
+        private $json = [];
         private $fp;
         const FILE_NAME = "../book.json";
 
@@ -256,6 +256,7 @@
             }
             return $oya;
         }
+
         /**
          * JSONのセッター
          *
@@ -281,7 +282,7 @@
 
             $file = fread($this->fp, filesize(self::FILE_NAME));
             $json = json_decode($file);
-            if ($json === false) {
+            if ($json === false || $json === null) {
                 $this->json = [];
             } else {
                 $this->json = $json;
