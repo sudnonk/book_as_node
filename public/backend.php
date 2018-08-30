@@ -51,10 +51,12 @@
                 send("Parent ID doesn't exists.", 400);
             }
 
-            $json[$parent]["children"][] = $data;
+            $data["parent"] = $parent;
         } else {
-            $json[$id] = $data;
+            $data["parent"] = null;
         }
+
+        $json[$id] = $data;
 
         $j->setJson($json);
         $j->write();
@@ -62,7 +64,7 @@
         send("Success!", 200);
     } elseif ($_SERVER["REQUEST_METHOD"] === "GET") {
         $j = new Json();
-        $json = $j->getRawJson();
+        $json = $j->getFormattedJson();
 
         send($json, 200);
     }
@@ -174,7 +176,7 @@
     }
 
     class Json {
-        private $json = "";
+        private $json;
         private $fp;
         const FILE_NAME = "../book.json";
 
@@ -194,29 +196,73 @@
          * @return array
          */
         public function getJson(): array {
-            if ($json = json_decode($this->json, true)) {
-                return $json;
-            } else {
-                return [];
-            }
-        }
-
-        /**
-         * 生の文字列のJSONを返す
-         *
-         * @return string
-         */
-        public function getRawJson(): string {
             return $this->json;
         }
 
+        /**
+         * d3.jsのtreeで使う形式のJSONにして返す
+         *
+         * @see https://wizardace.com/d3-hierarchy/
+         * @return string
+         */
+        public function getFormattedJson(): string {
+            $json = $this->getJson();
+
+            $newJson = [
+                "name"     => "invisibleRoot",
+                "children" => [],
+            ];
+
+            foreach ($json as $id => $datum) {
+                $newDatum = [
+                    "name"     => $id,
+                    "type"     => $datum["type"],
+                    "children" => [],
+                ];
+                if ($newDatum["type"] === "book") {
+                    $newDatum["isbn"] = $datum["isbn"];
+                } else {
+                    $newDatum["text"] = $datum["text"];
+                }
+
+                if (!isset($datum["parent"]) || $datum["parent"] === null) {
+                    $newJson["children"][] = $newDatum;
+                } else {
+                    $newDatum["parent"] = $datum["parent"];
+                    $newJson = self::recursiveAddChild($newJson, $newDatum);
+                }
+            }
+
+            return json_encode($newJson);
+        }
+
+        /**
+         * @param $oya
+         * @param $child
+         *
+         * @return array
+         */
+        private static function recursiveAddChild($oya, $child): array {
+            foreach ($oya["children"] as $k => $ko) {
+                if ($ko["name"] === $child["parent"]) {
+                    $ko["children"][] = $child;
+
+                    $oya["children"][$k] = $ko;
+                    return $oya;
+                }
+            }
+            foreach ($oya["children"] as $k => $ko) {
+                $oya["children"][$k] = self::recursiveAddChild($ko, $child);
+            }
+            return $oya;
+        }
         /**
          * JSONのセッター
          *
          * @param array $json
          */
         public function setJson(array $json) {
-            $this->json = json_encode($json);
+            $this->json = $json;
         }
 
         /**
@@ -233,7 +279,13 @@
                 send("Could not lock file.", 500);
             }
 
-            $this->json = fread($this->fp, filesize(self::FILE_NAME));
+            $file = fread($this->fp, filesize(self::FILE_NAME));
+            $json = json_decode($file);
+            if ($json === false) {
+                $this->json = [];
+            } else {
+                $this->json = $json;
+            }
         }
 
         /**
