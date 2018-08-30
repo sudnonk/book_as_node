@@ -34,23 +34,28 @@
             send("Type is invalid.", 400);
         }
 
+        $data["children"] = [];
+
         $j = new Json();
         $json = $j->getJson();
         $ids = $j->getIDs();
+
+        if (count($ids) === 0) {
+            $id = 1;
+        } else {
+            $id = max($ids) + 1;
+        }
+
         if ($parent && strlen($parent) > 0) {
             if (!in_array($parent, $ids, true)) {
                 send("Parent ID doesn't exists.", 400);
             }
-            $data["parent"] = $parent;
+
+            $json[$parent]["children"][] = $data;
+        }else{
+            $json[$id] = $data;
         }
 
-        if (count($ids) === 0) {
-            $data["ID"] = 1;
-        } else {
-            $data["ID"] = max($ids) + 1;
-        }
-
-        $json[] = $data;
         $j->setJson($json);
         $j->write();
 
