@@ -31,7 +31,7 @@ class BookTree extends Component {
         fetch("./backend.php").then(function (res) {
             return res.json();
         }).then(function (json) {
-            _self.setState({data: json.message.json()});
+            _self.setState({data: JSON.parse(json.message)});
         })
             .catch(console.error);
     }
