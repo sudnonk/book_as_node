@@ -47,7 +47,7 @@
         }
 
         if ($parent && strlen($parent) > 0) {
-            if (!in_array($parent, $ids, true)) {
+            if (!in_array($parent, $ids)) {
                 send("Parent ID doesn't exists.", 400);
             }
 
