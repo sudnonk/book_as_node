@@ -52,7 +52,7 @@
             }
 
             $json[$parent]["children"][] = $data;
-        }else{
+        } else {
             $json[$id] = $data;
         }
 
@@ -80,7 +80,7 @@
     function send(string $msg, int $status) {
         $json = [
             "message" => $msg,
-            "status"  => $status
+            "status"  => $status,
         ];
         header("content-type: application/json", true, $status);
         echo json_encode($json);
@@ -93,6 +93,7 @@
          * ISBNを正規化するためにすべて数字/Xがある場合は大文字にする
          *
          * @param string $isbn
+         *
          * @return string
          */
         public static function normalize_isbn(string $isbn) {
@@ -240,14 +241,6 @@
          */
         public function write() {
             $json = $this->getJson();
-            uasort($json, function ($a, $b) {
-                if ($a["ID"] === $b["ID"]) {
-                    return 0;
-                }
-
-                return ($a["ID"] < $b["ID"]) ? -1 : 1;
-            });
-
             $json = json_encode($json);
 
             rewind($this->fp);
@@ -260,11 +253,12 @@
          * JSONに必要な値が入っているかを確認する
          *
          * @param array $data
+         *
          * @return bool
          */
         private static function validate(array $data): bool {
-            foreach ($data as $datum) {
-                if (isset($datum["ID"]) && isset($datum["type"])) {
+            foreach ($data as $id => $datum) {
+                if (isset($datum["type"])) {
                     if ($datum["type"] === "book") {
                         if (isset($datum["isbn"])) {
                             continue;
@@ -287,9 +281,7 @@
          * @return array
          */
         public function getIDs() {
-            return array_map(function ($datum) {
-                return $datum["ID"];
-            }, $this->getJson());
+            return array_keys($this->getJson());
         }
 
         /**
