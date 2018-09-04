@@ -26,6 +26,7 @@ class Form extends Component {
 
 
     onSubmit(event) {
+        console.log(this.props);
         const _self = this;
 
         const data = {
@@ -50,7 +51,7 @@ class Form extends Component {
             })
             .catch(console.error);
 
-        this.props.onchange();
+        this.props.onChange();
         event.preventDefault();
     }
 
@@ -71,7 +72,6 @@ class Form extends Component {
     }
 
     render() {
-        console.log(this.state);
         const _self = this;
         return (
             <form onSubmit={_self.onSubmit}>

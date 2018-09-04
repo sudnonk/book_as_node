@@ -34,14 +34,12 @@ class BookTree extends Component {
             return JSON.parse(json.message);
 
         }).then(function (data) {
-            console.log(data);
             _self.setState({data: data});
         })
             .catch(console.error);
     }
 
     drawTree() {
-        console.log(this.state);
         const svgNode = this.node;
         const _self = this;
 

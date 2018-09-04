@@ -15,6 +15,7 @@ class App extends Component {
     }
 
     onChange(){
+        console.log("onChange");
         this.setState({isChanged: true});
     }
 
