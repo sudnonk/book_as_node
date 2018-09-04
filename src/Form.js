@@ -15,12 +15,16 @@ class Form extends Component {
         this.setText = this.setText.bind(this);
         this.setISBN = this.setISBN.bind(this);
 
-        this.state = {
+        this.state = Form.defaultState(null);
+    }
+
+    static defaultState(status) {
+        return {
             type: "book",
             text: "",
             isbn: "",
-            status: null,
-            parent: ""
+            parent: "",
+            status: status
         };
     }
 
@@ -48,11 +52,10 @@ class Form extends Component {
                 return res.json();
             })
             .then(function (json) {
-                _self.setState({status: json});
+                _self.setState(Form.defaultState(json));
+                _self.props.onChange();
             })
             .catch(console.error);
-console.log(this.props);
-        this.props.onChange();
     }
 
     setType(type) {

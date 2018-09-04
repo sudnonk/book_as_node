@@ -169,7 +169,7 @@ class BookTree extends Component {
             <div>
                 <svg ref={node => this.node = node}></svg>
                 <h3>追加</h3>
-                <Form onChange={_self.onChange()}/>
+                <Form onChange={_self.onChange}/>
             </div>
         );
     }
