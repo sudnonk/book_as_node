@@ -29,6 +29,9 @@ class Desc extends Component {
     render() {
         const node = this.props.node;
         console.log(node);
+        if (node === null) {
+            return <div>no description.</div>;
+        }
         if (node.type === "book") {
             const bookData = this.getBookData(node.isbn);
             return (
