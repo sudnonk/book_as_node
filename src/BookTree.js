@@ -115,7 +115,7 @@ class BookTree extends Component {
             .on("click", function (d) {
                 _self.setState({
                     text: d.data.text,
-                    selected: d,
+                    selected: d.data,
                     unselected: _self.state.selected
                 });
             });
@@ -162,13 +162,7 @@ class BookTree extends Component {
         //Reactが生成したDOMを、this.nodeに入れる
         return (
             <div>
-                <Desc node={function () {
-                    if (_self.state.selected === null) {
-                        return null;
-                    } else {
-                        return _self.state.selected.data;
-                    }
-                }}/>
+                <Desc node={_self.state.selected}/>
                 <svg ref={node => this.node = node}></svg>
                 <h3>追加</h3>
                 <Form onChange={_self.onChange}/>
