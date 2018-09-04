@@ -34,43 +34,10 @@ class BookTree extends Component {
             return JSON.parse(json.message);
 
         }).then(function (data) {
-            _self.setState({data: _self.arrangeData(data)});
+            console.log(data);
+            _self.setState({data: data});
         })
             .catch(console.error);
-    }
-
-    arrangeData(data) {
-        let arrangedData = {
-            name: "invisibleRoot",
-            children: []
-        };
-        let newData = [];
-
-        data.forEach(function (datum) {
-            let newDatum = [];
-            newDatum.name = datum["ID"];
-            newDatum.type = datum["type"];
-            newDatum.parent = datum["parent"] || null;
-            if (newDatum.type === "book") {
-                newDatum.isbn = datum["isbn"];
-            } else {
-                newDatum.text = datum["text"];
-            }
-            newDatum.children = [];
-
-            newData.push(newDatum);
-        });
-
-        newData.forEach(function (datum) {
-            const key = datum.parent;
-            newData.forEach(function (datum2) {
-                if (datum2.name === key) {
-                    datum.children.push(datum2);
-                }
-            })
-        });
-
-        console.log(newData);
     }
 
     drawTree() {
