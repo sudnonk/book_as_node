@@ -69,6 +69,10 @@
         send($json, 200);
     }
 
+    $j = new Json();
+    $json = $j->getFormattedJson();
+    var_dump($json);
+    exit();
 
     send("Bad request.", 400);
 
