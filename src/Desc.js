@@ -13,7 +13,7 @@ class Desc extends Component {
     }
 
     async getBookData(isbn) {
-        return await fetch("https://api.opendb.jp/v1/get?isbn=" + isbn)
+        return await fetch("https://api.openbd.jp/v1/get?isbn=" + isbn)
             .then(function (res) {
                 console.log(res);
                 return res.json();
