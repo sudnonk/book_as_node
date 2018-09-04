@@ -8,6 +8,10 @@ class Desc extends Component {
 
         this.state = {
             bookData: null
+        };
+
+        if (this.props.node !== null && this.props.node.data.type === "book") {
+            this.getBookData(this.props.node.data.ISBN);
         }
     }
 
@@ -34,7 +38,7 @@ class Desc extends Component {
         const node = this.props.node.data;
         console.log(node);
         if (node.type === "book") {
-            const bookData = this.getBookData(node.ISBN);
+            const bookData = this.state.bookData;
             console.log(bookData);
             return (
                 <div>
