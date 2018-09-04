@@ -15,6 +15,7 @@ class Desc extends Component {
         const _self = this;
         fetch("https://api.opendb.jp/v1/get?isbn=" + isbn)
             .then(function (res) {
+                console.log(res);
                 return res.json();
             })
             .then(function (data) {
