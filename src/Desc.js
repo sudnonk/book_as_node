@@ -7,7 +7,7 @@ class Desc extends Component {
         super(props);
 
         this.state = {
-            bookData: {}
+            bookData: null
         }
     }
 
@@ -28,7 +28,7 @@ class Desc extends Component {
     }
 
     render() {
-        if (this.props.node === null) {
+        if (this.props.node === null || this.state.bookData === null) {
             return <div>no description.</div>;
         }
         const node = this.props.node.data;
