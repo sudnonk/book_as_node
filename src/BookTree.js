@@ -116,6 +116,8 @@ class BookTree extends Component {
                 d3.select(this).remove();
         });
         link.each(function (d) {
+            console.log(d);
+            return;
             if (d.source.name === "invisibleRoot")
                 d3.select(this).remove();
         });
