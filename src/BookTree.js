@@ -31,6 +31,10 @@ class BookTree extends Component {
         this.drawTree();
     }
 
+    componentWillUpdate() {
+        console.log(this.state);
+    }
+
     onChange() {
         this.fetchData();
     }
