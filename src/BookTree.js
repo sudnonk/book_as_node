@@ -1,6 +1,7 @@
 import React, {Component} from 'react';
 import * as d3 from 'd3';
 import Form from "./Form";
+import Desc from "./Desc";
 
 class BookTree extends Component {
 
@@ -155,22 +156,13 @@ class BookTree extends Component {
 
     }
 
-    selectionChanged() {
-        if (this.state.selected !== null) {
-            this.state.selected.children[0].setAttribute("fill", "#00ff00");
-        }
-        if (this.state.unselected !== null) {
-            this.state.unselected.children[0].setAttribute("fill", "#fff");
-        }
-    }
-
     render() {
         const _self = this;
 
         //Reactが生成したDOMを、this.nodeに入れる
         return (
             <div>
-                <p>{_self.state.text}</p>
+                <Desc node={this.state.selected.data}/>
                 <svg ref={node => this.node = node}></svg>
                 <h3>追加</h3>
                 <Form onChange={_self.onChange}/>
