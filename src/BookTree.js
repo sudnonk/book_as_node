@@ -10,9 +10,11 @@ class BookTree extends Component {
         //こうしないとthisがundefinedになる
         this.drawTree = this.drawTree.bind(this);
         this.fetchData = this.fetchData.bind(this);
+        this.onChange = this.onChange.bind(this);
 
         this.state = {
-            data: {}
+            data: {},
+            isChanged: false
         };
         this.fetchData();
     }
@@ -25,6 +27,10 @@ class BookTree extends Component {
     //コンポーネントが更新されたときに呼ばれる
     componentDidUpdate() {
         this.drawTree();
+    }
+
+    onChange() {
+        this.fetchData();
     }
 
     fetchData() {
@@ -161,7 +167,7 @@ class BookTree extends Component {
             <div>
                 <svg ref={node => this.node = node}></svg>
                 <h3>追加</h3>
-                <Form/>
+                <Form onChange={this.onChange()}/>
             </div>
         );
     }

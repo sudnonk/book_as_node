@@ -51,6 +51,8 @@ class Form extends Component {
                 _self.setState({status: json});
             })
             .catch(console.error);
+
+        this.props.onChange();
     }
 
     setType(type) {
