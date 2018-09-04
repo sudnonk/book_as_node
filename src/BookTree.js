@@ -115,7 +115,7 @@ class BookTree extends Component {
             .on("click", function (d) {
                 _self.setState({
                     text: d.data.text,
-                    selected: this,
+                    selected: d,
                     unselected: _self.state.selected
                 });
             });
