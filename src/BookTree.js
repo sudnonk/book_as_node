@@ -31,10 +31,6 @@ class BookTree extends Component {
         this.drawTree();
     }
 
-    componentWillUpdate() {
-        console.log(this.state);
-    }
-
     onChange() {
         this.fetchData();
     }
@@ -115,6 +111,7 @@ class BookTree extends Component {
                 return "translate(" + d.y + "," + d.x + ")";
             })
             .on("click", function (d) {
+                console.log(d);
                 _self.setState({
                     selected: d.data,
                 });
