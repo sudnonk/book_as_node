@@ -228,7 +228,7 @@
                 } else {
                     $newDatum["text"] = $datum["text"];
                 }
-
+var_dump($datum["parent"]);
                 if (!isset($datum["parent"]) || $datum["parent"] === null) {
                     $newJson["children"][] = $newDatum;
                 } else {
@@ -247,6 +247,7 @@
          * @return array
          */
         private static function recursiveAddChild($oya, $child): array {
+            var_dump($oya);
             foreach ($oya["children"] as $k => $ko) {
                 if ($ko["name"] === $child["parent"]) {
                     $ko["children"][] = $child;
