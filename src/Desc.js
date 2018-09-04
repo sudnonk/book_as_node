@@ -8,7 +8,8 @@ class Desc extends Component {
 
         this.state = {
             bookData: null,
-            node: null
+            node: null,
+            text: null
         };
     }
 
@@ -28,13 +29,19 @@ class Desc extends Component {
     }
 
     async componentWillReceiveProps() {
-        console.log(this.props);
         if (this.props.node !== null) {
             if (this.props.node.type === "book") {
                 if (this.props.node.isbn !== null) {
                     let state = {};
                     state.bookData = await Desc.getBookData(this.props.node.isbn);
                     state.node = this.props.node;
+
+                    this.setState(state);
+                }
+            }else if(this.props.node.type === "text"){
+                if (this.props.node.text !== null) {
+                    let state = {};
+                    state.text = this.props.node.text;
 
                     this.setState(state);
                 }
@@ -82,7 +89,7 @@ class Desc extends Component {
         } else if (this.state.node.type === "text") {
             return (
                 <div>
-                    <p>{this.state.node.text}</p>
+                    <p>{this.state.text}</p>
                 </div>
             );
         } else {
