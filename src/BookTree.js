@@ -14,7 +14,10 @@ class BookTree extends Component {
 
         this.state = {
             data: {},
-            isChanged: false
+            isChanged: false,
+            text: "",
+            selected: null,
+            unselected: null
         };
         this.fetchData();
     }
@@ -167,6 +170,7 @@ class BookTree extends Component {
         //Reactが生成したDOMを、this.nodeに入れる
         return (
             <div>
+                <p>{_self.state.text}</p>
                 <svg ref={node => this.node = node}></svg>
                 <h3>追加</h3>
                 <Form onChange={_self.onChange}/>
