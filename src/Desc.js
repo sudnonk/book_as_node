@@ -34,7 +34,7 @@ class Desc extends Component {
         const node = this.props.node.data;
         console.log(node);
         if (node.type === "book") {
-            const bookData = this.getBookData(node.isbn);
+            const bookData = this.getBookData(node.ISBN);
             return (
                 <div>
                     <dl>
