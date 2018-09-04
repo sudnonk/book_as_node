@@ -16,9 +16,7 @@ class BookTree extends Component {
         this.state = {
             data: {},
             isChanged: false,
-            text: "",
             selected: null,
-            unselected: null
         };
         this.fetchData();
     }
@@ -114,9 +112,7 @@ class BookTree extends Component {
             })
             .on("click", function (d) {
                 _self.setState({
-                    text: d.data.text,
                     selected: d.data,
-                    unselected: _self.state.selected
                 });
             });
 

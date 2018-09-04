@@ -30,6 +30,7 @@ class Desc extends Component {
 
     async componentWillReceiveProps() {
         if (this.props.node !== null) {
+            console.log(this.props.node);
             if (this.props.node.type === "book") {
                 if (this.props.node.isbn !== null) {
                     let state = {};
@@ -38,7 +39,7 @@ class Desc extends Component {
 
                     this.setState(state);
                 }
-            }else if(this.props.node.type === "text"){
+            } else if (this.props.node.type === "text") {
                 if (this.props.node.text !== null) {
                     let state = {};
                     state.text = this.props.node.text;
