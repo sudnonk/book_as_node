@@ -317,7 +317,7 @@
             foreach ($data as $id => $datum) {
                 if (isset($datum["type"])) {
                     if ($datum["type"] === "book") {
-                        if (isset($datum["isbn"])) {
+                        if (isset($datum["ISBN"])) {
                             continue;
                         }
                     }
