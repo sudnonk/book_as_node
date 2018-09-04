@@ -111,6 +111,15 @@ class BookTree extends Component {
                 });
             });
 
+        node.each(function (d) {
+            if (d.name === "invisibleRoot")
+                d3.select(this).remove();
+        });
+        link.each(function (d) {
+            if (d.source.name === "invisibleRoot")
+                d3.select(this).remove();
+        });
+
 
         //ノードを円にする
         node.append("rect")
@@ -134,6 +143,8 @@ class BookTree extends Component {
             .text(function (d) {
                 return d.data.name;
             });
+
+
     }
 
     selectionChanged() {
