@@ -163,10 +163,10 @@ class BookTree extends Component {
         return (
             <div>
                 <Desc node={function () {
-                    if (this.state.selected === null) {
+                    if (_self.state.selected === null) {
                         return null;
                     } else {
-                        return this.state.selected.data;
+                        return _self.state.selected.data;
                     }
                 }}/>
                 <svg ref={node => this.node = node}></svg>
