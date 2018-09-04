@@ -26,7 +26,8 @@ class Form extends Component {
 
 
     onSubmit(event) {
-        console.log(this.props);
+        event.preventDefault();
+
         const _self = this;
 
         const data = {
@@ -50,9 +51,6 @@ class Form extends Component {
                 _self.setState({status: json});
             })
             .catch(console.error);
-
-        this.props.onChange();
-        event.preventDefault();
     }
 
     setType(type) {

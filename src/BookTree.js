@@ -1,5 +1,6 @@
 import React, {Component} from 'react';
 import * as d3 from 'd3';
+import Form from "./Form";
 
 class BookTree extends Component {
 
@@ -156,7 +157,13 @@ class BookTree extends Component {
 
     render() {
         //Reactが生成したDOMを、this.nodeに入れる
-        return <svg ref={node => this.node = node}></svg>;
+        return (
+            <div>
+                <svg ref={node => this.node = node}></svg>
+                <h3>追加</h3>
+                <Form/>
+            </div>
+        );
     }
 }
 

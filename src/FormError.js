@@ -2,7 +2,6 @@ import React, {Component} from 'react'
 
 class FormError extends Component {
     render() {
-        console.log(this.props.status);
         if (this.props.status === null) {
             return <br/>;
         } else {
