@@ -30,7 +30,6 @@ class Desc extends Component {
 
     async componentWillReceiveProps() {
         if (this.props.node !== null) {
-            console.log(this.props.node);
             if (this.props.node.type === "book") {
                 if (this.props.node.isbn !== null) {
                     let state = {};
@@ -55,8 +54,6 @@ class Desc extends Component {
             return <div>no description.</div>;
         }
         if (this.state.node.type === "book" && this.state.bookData !== null) {
-            const bookData = this.state.bookData;
-            console.log(bookData);
             return (
                 <div>
                     <dl>
