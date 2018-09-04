@@ -20,7 +20,7 @@
             ISBN::check_isbn($isbn);
 
             $data["type"] = $type;
-            $data["ISBN"] = $isbn;
+            $data["isbn"] = $isbn;
         } elseif ($type === "text") {
             if (!$text || !is_string($text) || strlen($text) < 1) {
                 send("Text is required with type text.", 400);
@@ -317,7 +317,7 @@
             foreach ($data as $id => $datum) {
                 if (isset($datum["type"])) {
                     if ($datum["type"] === "book") {
-                        if (isset($datum["ISBN"])) {
+                        if (isset($datum["isbn"])) {
                             continue;
                         }
                     }
