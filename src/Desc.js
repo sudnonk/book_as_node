@@ -25,6 +25,7 @@ class Desc extends Component {
     }
 
     async componentWillReceiveProps() {
+        console.log(this.props);
         if (this.props.node !== null) {
             if (this.props.node.type === "book") {
                 if (this.props.node.isbn !== null) {
