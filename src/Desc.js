@@ -9,15 +9,10 @@ class Desc extends Component {
         this.state = {
             bookData: null
         };
-
-        if (this.props.node !== null && this.props.node.data.type === "book") {
-            this.getBookData(this.props.node.data.ISBN);
-        }
     }
 
-    getBookData(isbn) {
-        const _self = this;
-        fetch("https://api.opendb.jp/v1/get?isbn=" + isbn)
+    async getBookData(isbn) {
+        return await fetch("https://api.opendb.jp/v1/get?isbn=" + isbn)
             .then(function (res) {
                 console.log(res);
                 return res.json();
@@ -25,20 +20,17 @@ class Desc extends Component {
             .then(function (data) {
                 return JSON.parse(data[0]);
             })
-            .then(function (json) {
-                _self.setState({bookData: json});
-            })
             .catch(console.error);
     }
 
-    render() {
+    async render() {
         if (this.props.node === null || this.state.bookData === null) {
             return <div>no description.</div>;
         }
         const node = this.props.node.data;
         console.log(node);
         if (node.type === "book") {
-            const bookData = this.state.bookData;
+            const bookData = await this.getBookData(node.ISBN);
             console.log(bookData);
             return (
                 <div>
