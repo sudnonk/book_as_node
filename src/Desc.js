@@ -12,19 +12,16 @@ class Desc extends Component {
         };
     }
 
-    async getBookData(isbn) {
+    static async getBookData(isbn) {
         return await fetch("https://api.openbd.jp/v1/get?isbn=" + isbn)
             .then(function (res) {
-                console.log(res);
                 return res.json();
             })
-            .then(function (data) {
-                return JSON.parse(data[0]);
-            })
             .then(function (json) {
+                const data = json[0].summary;
                 return {
-                    author: json.summary.author,
-                    title: json.summary.title
+                    author: data.author,
+                    title: data.title
                 };
             })
             .catch(console.error);
@@ -36,7 +33,7 @@ class Desc extends Component {
             if (this.props.node.type === "book") {
                 if (this.props.node.isbn !== null) {
                     let state = {};
-                    state.bookData = await this.getBookData(this.props.node.isbn);
+                    state.bookData = await Desc.getBookData(this.props.node.isbn);
                     state.node = this.props.node;
 
                     this.setState(state);
