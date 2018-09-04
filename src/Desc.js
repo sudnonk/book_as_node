@@ -21,6 +21,12 @@ class Desc extends Component {
             .then(function (data) {
                 return JSON.parse(data[0]);
             })
+            .then(function (json) {
+                return {
+                    author: json.summary.author,
+                    title: json.summary.title
+                };
+            })
             .catch(console.error);
     }
 
