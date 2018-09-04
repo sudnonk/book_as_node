@@ -162,7 +162,7 @@ class BookTree extends Component {
         //Reactが生成したDOMを、this.nodeに入れる
         return (
             <div>
-                <Desc node={this.state.selected}/>
+                <Desc node={this.state.selected.data}/>
                 <svg ref={node => this.node = node}></svg>
                 <h3>追加</h3>
                 <Form onChange={_self.onChange}/>

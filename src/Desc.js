@@ -26,18 +26,20 @@ class Desc extends Component {
 
     async componentWillReceiveProps() {
         if (this.props.node !== null) {
-            if (this.props.node.data.isbn !== null) {
-                let state = {};
-                state.bookData = await this.getBookData(this.props.node.data.isbn);
-                state.node = this.props.node.data;
+            if (this.props.node.type === "book") {
+                if (this.props.node.isbn !== null) {
+                    let state = {};
+                    state.bookData = await this.getBookData(this.props.node.isbn);
+                    state.node = this.props.node;
 
-                this.setState(state);
+                    this.setState(state);
+                }
             }
         }
     }
 
     render() {
-        if(this.state.node === null){
+        if (this.state.node === null) {
             return <div>no description.</div>;
         }
         if (this.state.node.type === "book" && this.state.bookData !== null) {
@@ -73,13 +75,13 @@ class Desc extends Component {
                     </dl>
                 </div>
             );
-        } else if(this.state.node.type === "text") {
+        } else if (this.state.node.type === "text") {
             return (
                 <div>
                     <p>{this.state.node.text}</p>
                 </div>
             );
-        }else{
+        } else {
             return <div>no description.</div>;
         }
     }
