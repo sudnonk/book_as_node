@@ -7,7 +7,8 @@ class Desc extends Component {
         super(props);
 
         this.state = {
-            bookData: null
+            bookData: null,
+            node: null
         };
     }
 
@@ -23,14 +24,24 @@ class Desc extends Component {
             .catch(console.error);
     }
 
-    async render() {
-        if (this.props.node === null || this.state.bookData === null) {
+    async componentWillReceiveProps() {
+        if (this.props.node !== null) {
+            if (this.props.node.data.isbn !== null) {
+                let state = {};
+                state.bookData = await this.getBookData(this.props.node.data.isbn);
+                state.node = this.props.node.data;
+
+                this.setState(state);
+            }
+        }
+    }
+
+    render() {
+        if(this.state.node === null){
             return <div>no description.</div>;
         }
-        const node = this.props.node.data;
-        console.log(node);
-        if (node.type === "book") {
-            const bookData = await this.getBookData(node.ISBN);
+        if (this.state.node.type === "book" && this.state.bookData !== null) {
+            const bookData = this.state.bookData;
             console.log(bookData);
             return (
                 <div>
@@ -39,35 +50,37 @@ class Desc extends Component {
                             ISBNコード
                         </dt>
                         <dd>
-                            {node.isbn}
+                            {this.state.node.isbn}
                         </dd>
                         <dt>
                             タイトル
                         </dt>
                         <dd>
-                            {bookData.title}
+                            {this.state.bookData.title}
                         </dd>
                         <dt>
                             著者
                         </dt>
                         <dd>
-                            {bookData.author}
+                            {this.state.bookData.author}
                         </dd>
                         <dt>
                             読書録URL
                         </dt>
                         <dd>
-                            <a href={node.URL}>{node.URL}</a>
+                            <a href={this.state.node.URL}>{this.state.node.URL}</a>
                         </dd>
                     </dl>
                 </div>
             );
-        } else {
+        } else if(this.state.node.type === "text") {
             return (
                 <div>
-                    <p>{node.text}</p>
+                    <p>{this.state.node.text}</p>
                 </div>
             );
+        }else{
+            return <div>no description.</div>;
         }
     }
 }
