@@ -138,7 +138,7 @@ class BookTree extends Component {
         //半径を設定
             .attr("class", "rect")
             .attr("width", rectSize)
-            .attr("height", rectSize)
+            .attr("height", rectSize/2)
             .attr("stroke", "#000")
             //色を設定
             .attr("fill", "#fff");
@@ -149,7 +149,7 @@ class BookTree extends Component {
             .attr("x", rectSize / 2)
             .attr("y", rectSize * 0.9)
             //文字のサイズ
-            .attr("text-anchor", "middle")
+            //.attr("text-anchor", "middle")
             .attr("font-size", "15");
         //描画する文字
         //IDを表示
