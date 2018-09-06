@@ -111,7 +111,6 @@ class BookTree extends Component {
                 return "translate(" + d.y + "," + d.x + ")";
             })
             .on("click", function (d) {
-                console.log(d);
                 _self.setState({
                     selected: d.data,
                 });
@@ -155,7 +154,6 @@ class BookTree extends Component {
 
     render() {
         const _self = this;
-        console.log(_self.state.selected);
 
         //Reactが生成したDOMを、this.nodeに入れる
         return (
