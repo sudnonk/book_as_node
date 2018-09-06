@@ -144,20 +144,20 @@ class BookTree extends Component {
             .attr("fill", "#fff");
 
         //ノードに文字を追加する
-        node.append("text")
+        let text = node.append("text")
         //文字を書く場所
             .attr("x", rectSize / 2)
             .attr("y", rectSize * 0.9)
             //文字のサイズ
-            .attr("text-anchor", "middle")
-            //描画する文字
-            //IDを表示
-            .append("tspan")
+            .attr("text-anchor", "middle");
+        //描画する文字
+        //IDを表示
+        text.append("tspan")
             .text(function (d) {
                 return d.data.name;
-            })
-            //内容を表示
-            .append("tspan")
+            });
+        //内容を表示
+        text.append("tspan")
             .text(function (d) {
                 if (d.data.type === "book") {
                     return d.data.isbn;
