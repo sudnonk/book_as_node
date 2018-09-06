@@ -76,7 +76,7 @@ class BookTree extends Component {
 
         //ツリーを書くグラフ領域を設定
         let tree = d3.tree()
-            .size([height, width-200])
+            .size([height, width-400])
             .separation(function () {
                 return 0.1;
             });
@@ -157,19 +157,19 @@ class BookTree extends Component {
         //文字のサイズ
             .attr("font-size", "15")
             .attr("text-anchor", "middle")
-            .attr("x", rectWidth / 2);
+            .attr("x", rectWidth / 3);
 
         //描画する文字
         //IDを表示
         text.append("tspan")
-            .attr("y", rectWidth * 0.9 / 2)
+            .attr("y", rectHeight * 0.9 / 2)
             .text(function (d) {
                 return d.data.name;
             });
 
         //内容を表示
         text.append("tspan")
-            .attr("y", 20 + rectWidth * 0.9 / 2)
+            .attr("y", 20 + rectHeight * 0.9 / 2)
             .text(function (d) {
                 if (d.data.type === "book") {
                     return d.data.isbn;
