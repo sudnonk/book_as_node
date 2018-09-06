@@ -66,8 +66,14 @@ class BookTree extends Component {
         const rectHeight = 50;
 
         //データをツリー形式に変換する。この時ノードの相対位置とかも決まる。
-
         const root = d3.hierarchy(_self.state.data);
+
+        let maxDepth = 0;
+        root.each(function (d) {
+            maxDepth = Math.max(d.depth, maxDepth);
+        });
+
+        console.log(maxDepth);
         //ツリーを書くグラフ領域を設定
         let tree = d3.tree()
             .size([height, width - 200])
@@ -151,7 +157,7 @@ class BookTree extends Component {
         //文字のサイズ
             .attr("font-size", "15")
             .attr("text-anchor", "middle")
-            .attr("x", rectWidth/2);
+            .attr("x", rectWidth / 2);
 
         //描画する文字
         //IDを表示
