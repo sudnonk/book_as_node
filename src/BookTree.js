@@ -149,7 +149,8 @@ class BookTree extends Component {
             .attr("x", rectSize / 2)
             .attr("y", rectSize * 0.9)
             //文字のサイズ
-            .attr("text-anchor", "middle");
+            .attr("text-anchor", "middle")
+            .attr("font-size", "15");
         //描画する文字
         //IDを表示
         text.append("tspan")
@@ -158,6 +159,7 @@ class BookTree extends Component {
             });
         //内容を表示
         text.append("tspan")
+            .attr("x", 15)
             .text(function (d) {
                 if (d.data.type === "book") {
                     return d.data.isbn;
