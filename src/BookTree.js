@@ -138,16 +138,17 @@ class BookTree extends Component {
         //半径を設定
             .attr("class", "rect")
             .attr("width", rectSize)
-            .attr("height", rectSize/2)
+            .attr("height", rectSize / 2)
             .attr("stroke", "#000")
             //色を設定
-            .attr("fill", "#fff");
+            .attr("fill", "#fff")
+            .attr("y", rectSize / 4);
 
         //ノードに文字を追加する
         let text = node.append("text")
         //文字を書く場所
             .attr("x", rectSize / 2)
-            .attr("y", rectSize * 0.9)
+            //.attr("y", rectSize * 0.9)
             //文字のサイズ
             //.attr("text-anchor", "middle")
             .attr("font-size", "15");
