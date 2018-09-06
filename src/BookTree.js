@@ -60,11 +60,6 @@ class BookTree extends Component {
 
         svgNode.innerHTML = "";
 
-        const width = 1000;
-        const height = 1000;
-        const rectWidth = 150;
-        const rectHeight = 50;
-
         //データをツリー形式に変換する。この時ノードの相対位置とかも決まる。
         const root = d3.hierarchy(_self.state.data);
 
@@ -73,7 +68,12 @@ class BookTree extends Component {
             maxDepth = Math.max(d.depth, maxDepth);
         });
 
-        console.log(maxDepth);
+        const rectWidth = 150;
+        const rectHeight = 50;
+
+        const width = rectWidth * maxDepth * 1.5;
+        const height = 1000;
+
         //ツリーを書くグラフ領域を設定
         let tree = d3.tree()
             .size([height, width - 200])
