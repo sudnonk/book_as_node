@@ -147,21 +147,21 @@ class BookTree extends Component {
         //ノードに文字を追加する
         let text = node.append("text")
         //文字を書く場所
-            .attr("x", rectSize / 2)
-            //.attr("y", rectSize * 0.9)
-            //文字のサイズ
-            //.attr("text-anchor", "middle")
-            .attr("font-size", "15");
+        //文字のサイズ
+            .attr("font-size", "15")
+            .attr("text-anchor", "middle");
+
         //描画する文字
         //IDを表示
         text.append("tspan")
-            .attr("y", rectSize / 2)
+            .attr("y", rectSize * 0.9 / 2)
             .text(function (d) {
                 return d.data.name;
             });
+
         //内容を表示
         text.append("tspan")
-            .attr("y", 15 + rectSize / 2)
+            .attr("y", 15 + rectSize * 0.9 / 2)
             .text(function (d) {
                 if (d.data.type === "book") {
                     return d.data.isbn;
