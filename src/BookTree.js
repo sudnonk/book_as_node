@@ -76,7 +76,7 @@ class BookTree extends Component {
         const rectHeight = 50;
 
         const width = rectWidth * maxDepth * 2;
-        const height = rectHeight * numRoot * 2;
+        const height = rectHeight * numRoot * 5;
 
         //ツリーを書くグラフ領域を設定
         let tree = d3.tree()
