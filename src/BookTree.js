@@ -89,7 +89,7 @@ class BookTree extends Component {
         //書き込み先のSVGのサイズを設定
         svg.attr("height", height).attr("width", width);
         //SVGにgタグを追加し、位置を調整
-        const g = svg.append("g");
+        const g = svg.append("g").attr("transform","translate(-200px,0)");
 
         //ノードをつなぐ線を描画する
         //SVGの線には.linkというタグが付けるので、それがついているものをすべて選択
@@ -186,7 +186,7 @@ class BookTree extends Component {
 
         //Reactが生成したDOMを、this.nodeに入れる
         return (
-            <div>
+            <div style={()=> "overflow: scroll,max-width:1000px"}>
                 <Desc node={_self.state.selected}/>
                 <svg ref={node => this.node = node}></svg>
                 <h3>追加</h3>
