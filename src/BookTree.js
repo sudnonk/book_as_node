@@ -186,9 +186,9 @@ class BookTree extends Component {
 
         //Reactが生成したDOMを、this.nodeに入れる
         return (
-            <div style={{"overflow-x": "scroll", "max-width": "1000px"}}>
+            <div>
                 <Desc node={_self.state.selected}/>
-                <svg ref={node => this.node = node}></svg>
+                <svg  style={{"overflow-x": "scroll", "max-width": "1000px"}} ref={node => this.node = node}></svg>
                 <h3>追加</h3>
                 <Form onChange={_self.onChange}/>
             </div>
