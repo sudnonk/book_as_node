@@ -62,7 +62,7 @@ class BookTree extends Component {
 
         const width = 1000;
         const height = 1000;
-        const rectWidth = 100;
+        const rectWidth = 150;
         const rectHeight = 50;
 
         //データをツリー形式に変換する。この時ノードの相対位置とかも決まる。
@@ -143,7 +143,7 @@ class BookTree extends Component {
             .attr("stroke", "#000")
             //色を設定
             .attr("fill", "#fff")
-            .attr("y", rectHeight / 4);
+            .attr("y", rectHeight / 2);
 
         //ノードに文字を追加する
         let text = node.append("text")
@@ -151,7 +151,7 @@ class BookTree extends Component {
         //文字のサイズ
             .attr("font-size", "15")
             .attr("text-anchor", "middle")
-            .attr("x", rectWidth);
+            .attr("x", rectWidth/2);
 
         //描画する文字
         //IDを表示
