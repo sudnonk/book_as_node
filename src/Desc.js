@@ -42,6 +42,7 @@ class Desc extends Component {
                 if (nextProps.node.text !== null) {
                     let state = {};
                     state.text = nextProps.node.text;
+                    state.node = nextProps.node;
 
                     this.setState(state);
                 }
