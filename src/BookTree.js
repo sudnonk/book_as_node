@@ -60,8 +60,8 @@ class BookTree extends Component {
 
         svgNode.innerHTML = "";
 
-        const width = 500;
-        const height = 500;
+        const width = 1000;
+        const height = 1000;
         const rectSize = 100;
 
         //データをツリー形式に変換する。この時ノードの相対位置とかも決まる。
