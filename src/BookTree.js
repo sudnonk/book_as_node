@@ -68,7 +68,7 @@ class BookTree extends Component {
             maxDepth = Math.max(d.depth, maxDepth);
         });
         let numRoot = 0;
-        if(root.descendants()[0].children !== undefined){
+        if (root.descendants()[0].children !== undefined) {
             numRoot = root.descendants()[0].children.length;
         }
 
@@ -80,7 +80,7 @@ class BookTree extends Component {
 
         //ツリーを書くグラフ領域を設定
         let tree = d3.tree()
-            .size([height, width - 400])
+            .size([height, width])
             .separation(function () {
                 return 0.1;
             });
@@ -93,7 +93,7 @@ class BookTree extends Component {
         //書き込み先のSVGのサイズを設定
         svg.attr("height", height).attr("width", width);
         //SVGにgタグを追加し、位置を調整
-        const g = svg.append("g").attr("transform", "translate(-200,0)");
+        const g = svg.append("g").attr("transform", "translate(" + rectWidth + ",0)");
 
         //ノードをつなぐ線を描画する
         //SVGの線には.linkというタグが付けるので、それがついているものをすべて選択
