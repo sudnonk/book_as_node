@@ -62,7 +62,7 @@ class BookTree extends Component {
 
         const width = 500;
         const height = 500;
-        const rectSize = 30;
+        const rectSize = 100;
 
         //データをツリー形式に変換する。この時ノードの相対位置とかも決まる。
 
@@ -154,12 +154,13 @@ class BookTree extends Component {
         //描画する文字
         //IDを表示
         text.append("tspan")
+            .attr("y", rectSize / 2)
             .text(function (d) {
                 return d.data.name;
             });
         //内容を表示
         text.append("tspan")
-            .attr("x", 15)
+            .attr("y", 15 + rectSize / 2)
             .text(function (d) {
                 if (d.data.type === "book") {
                     return d.data.isbn;
