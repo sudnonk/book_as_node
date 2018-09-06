@@ -89,7 +89,7 @@ class BookTree extends Component {
         //書き込み先のSVGのサイズを設定
         svg.attr("height", height).attr("width", width);
         //SVGにgタグを追加し、位置を調整
-        const g = svg.append("g");
+        const g = svg.append("g").attr("transform","translate(-200,0)");
 
         //ノードをつなぐ線を描画する
         //SVGの線には.linkというタグが付けるので、それがついているものをすべて選択
@@ -162,14 +162,14 @@ class BookTree extends Component {
         //描画する文字
         //IDを表示
         text.append("tspan")
-            .attr("y", rectHeight * 0.9 / 2)
+            .attr("y", rectHeight * 0.9)
             .text(function (d) {
                 return d.data.name;
             });
 
         //内容を表示
         text.append("tspan")
-            .attr("y", 20 + rectHeight * 0.9 / 2)
+            .attr("y", 20 + rectHeight * 0.9)
             .text(function (d) {
                 if (d.data.type === "book") {
                     return d.data.isbn;
