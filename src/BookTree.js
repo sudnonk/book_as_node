@@ -151,14 +151,19 @@ class BookTree extends Component {
             //文字のサイズ
             .attr("text-anchor", "middle")
             //描画する文字
+            //IDを表示
+            .append("tspan")
             .text(function (d) {
-                let text = d.data.name + "<tbreak/>";
+                return d.data.name;
+            })
+            //内容を表示
+            .append("tspan")
+            .text(function (d) {
                 if (d.data.type === "book") {
-                    text += d.data.isbn;
+                    return d.data.isbn;
                 } else {
-                    text += d.data.text;
+                    return d.data.text;
                 }
-                return text;
             });
 
 
