@@ -80,7 +80,7 @@ class Form extends Component {
             <form onSubmit={_self.onSubmit}>
                 <FormError status={_self.state.status}/>
                 <FormParent parent={_self.state.parent} setParent={_self.setParent}/>
-                <FormType type={_self.state.type} text={_self.state.text} ISBN={_self.state.isbn}
+                <FormType type={_self.state.type} text={_self.state.text} isbn={_self.state.isbn}
                           setType={_self.setType} setText={_self.setText} setISBN={_self.setISBN}/>
                 <button type="submit">送信</button>
             </form>

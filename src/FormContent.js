@@ -11,7 +11,7 @@ class FormContent extends Component {
 
         this.state = {
             text: this.props.text,
-            isbn: this.props.ISBN
+            isbn: this.props.isbn
         };
     }
 
@@ -30,7 +30,7 @@ class FormContent extends Component {
             return (
                 <p>
                     <label htmlFor="isbn">ISBNコード</label><br/>
-                    <input name="isbn" type="text" value={this.props.ISBN} onChange={this.onISBNChange}/>
+                    <input name="isbn" type="text" value={this.props.isbn} onChange={this.onISBNChange}/>
                 </p>
             );
         } else {

@@ -42,7 +42,7 @@ class FormType extends Component {
                                onChange={this.setAsText}/> テキスト
                     </label>
                 </p>
-                <FormContent text={this.props.text} ISBN={this.props.ISBN}
+                <FormContent text={this.props.text} isbn={this.props.isbn}
                              type={this.props.type} setText={this.props.setText} setISBN={this.props.setISBN}/>
             </div>
         );
