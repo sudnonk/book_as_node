@@ -31,10 +31,16 @@ class BookTree extends Component {
         this.drawTree();
     }
 
+    /**
+     * フォーム送信時に新しいデータを取ってくる
+     */
     onChange() {
         this.fetchData();
     }
 
+    /**
+     * サーバからデータを取ってくる
+     */
     fetchData() {
         const _self = this;
         fetch("./backend.php").then(function (res) {
@@ -116,6 +122,7 @@ class BookTree extends Component {
                 });
             });
 
+        //一番根元を消す
         node.each(function (d) {
             if (d.data.name === "invisibleRoot")
                 d3.select(this).remove();
@@ -126,7 +133,7 @@ class BookTree extends Component {
         });
 
 
-        //ノードを円にする
+        //ノードを四角にする
         node.append("rect")
         //半径を設定
             .attr("class", "rect")
@@ -142,11 +149,16 @@ class BookTree extends Component {
             .attr("x", rectSize / 2)
             .attr("y", rectSize * 0.9)
             //文字のサイズ
-            .attr("font-size", "200%")
             .attr("text-anchor", "middle")
             //描画する文字
             .text(function (d) {
-                return d.data.name;
+                let text = d.data.name + "<tbreak/>";
+                if (d.data.type === "book") {
+                    text += d.data.isbn;
+                } else {
+                    text += d.data.text;
+                }
+                return text;
             });
 
 
