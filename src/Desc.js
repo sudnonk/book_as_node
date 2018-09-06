@@ -28,20 +28,20 @@ class Desc extends Component {
             .catch(console.error);
     }
 
-    async componentWillReceiveProps() {
-        if (this.props.node !== null) {
-            if (this.props.node.type === "book") {
-                if (this.props.node.isbn !== null) {
+    async componentWillReceiveProps(nextProps) {
+        if (nextProps.node !== null) {
+            if (nextProps.node.type === "book") {
+                if (nextProps.node.isbn !== null) {
                     let state = {};
-                    state.bookData = await Desc.getBookData(this.props.node.isbn);
-                    state.node = this.props.node;
+                    state.bookData = await Desc.getBookData(nextProps.node.isbn);
+                    state.node = nextProps.node;
 
                     this.setState(state);
                 }
-            } else if (this.props.node.type === "text") {
-                if (this.props.node.text !== null) {
+            } else if (nextProps.node.type === "text") {
+                if (nextProps.node.text !== null) {
                     let state = {};
-                    state.text = this.props.node.text;
+                    state.text = nextProps.node.text;
 
                     this.setState(state);
                 }
