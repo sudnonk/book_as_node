@@ -52,7 +52,7 @@ class Desc extends Component {
 
     render() {
         if (this.state.node === null) {
-            return <div>no description.</div>;
+            return <div>四角をクリックするとここに詳細が表示されます。</div>;
         }
         if (this.state.node.type === "book" && this.state.bookData !== null) {
             return (
