@@ -67,18 +67,17 @@ class BookTree extends Component {
         root.each(function (d) {
             maxDepth = Math.max(d.depth, maxDepth);
         });
-        let numRoot = 0;
-        console.log(root.descendants()[0].children);
+        let numRoot = root.descendants()[0].children.length;
 
         const rectWidth = 150;
         const rectHeight = 50;
 
         const width = rectWidth * maxDepth * 2;
-        const height = 1000;
+        const height = rectHeight * numRoot * 2;
 
         //ツリーを書くグラフ領域を設定
         let tree = d3.tree()
-            .size([height, width-400])
+            .size([height, width - 400])
             .separation(function () {
                 return 0.1;
             });
@@ -91,7 +90,7 @@ class BookTree extends Component {
         //書き込み先のSVGのサイズを設定
         svg.attr("height", height).attr("width", width);
         //SVGにgタグを追加し、位置を調整
-        const g = svg.append("g").attr("transform","translate(-200,0)");
+        const g = svg.append("g").attr("transform", "translate(-200,0)");
 
         //ノードをつなぐ線を描画する
         //SVGの線には.linkというタグが付けるので、それがついているものをすべて選択
@@ -190,7 +189,9 @@ class BookTree extends Component {
         return (
             <div>
                 <Desc node={_self.state.selected}/>
-                <svg  style={{"overflow-x": "scroll", "max-width": "1000px"}} ref={node => this.node = node}></svg>
+                <div style={{"overflow-x": "scroll", "max-width": "1000px"}}>
+                    <svg ref={node => this.node = node}></svg>
+                </div>
                 <h3>追加</h3>
                 <Form onChange={_self.onChange}/>
             </div>
