@@ -80,7 +80,7 @@ class BookTree extends Component {
 
         //ツリーを書くグラフ領域を設定
         let tree = d3.tree()
-            .size([height, width - 300])
+            .size([height, width * 0.9])
             .separation(function () {
                 return 0.5;
             });
