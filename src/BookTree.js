@@ -192,7 +192,7 @@ class BookTree extends Component {
         return (
             <div>
                 <Desc node={_self.state.selected}/>
-                <div style={{"overflow-x": "scroll", "max-width": "1000px"}}>
+                <div style={{"overflow-x": "scroll", "max-width": "1000px","margin":"0 auto"}}>
                     <svg ref={node => this.node = node}></svg>
                 </div>
                 <h3>追加</h3>
