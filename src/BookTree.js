@@ -80,7 +80,7 @@ class BookTree extends Component {
 
         //ツリーを書くグラフ領域を設定
         let tree = d3.tree()
-            .size([height, width])
+            .size([height, width - 300])
             .separation(function () {
                 return 0.1;
             });
@@ -91,7 +91,7 @@ class BookTree extends Component {
         //書き込むSVGをd3に登録
         const svg = d3.select(svgNode);
         //書き込み先のSVGのサイズを設定
-        svg.attr("height", height).attr("width", width);
+        svg.attr("height", height).attr("width", Math.max(1000, width));
         //SVGにgタグを追加し、位置を調整
         const g = svg.append("g").attr("transform", "translate(" + rectWidth + ",0)");
 
