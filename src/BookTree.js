@@ -67,7 +67,10 @@ class BookTree extends Component {
         root.each(function (d) {
             maxDepth = Math.max(d.depth, maxDepth);
         });
-        let numRoot = root.descendants()[0].children.length;
+        let numRoot = 0;
+        if(root.descendants()[0].children !== undefined){
+            numRoot = root.descendants()[0].children.length;
+        }
 
         const rectWidth = 150;
         const rectHeight = 50;
