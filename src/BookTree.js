@@ -62,7 +62,8 @@ class BookTree extends Component {
 
         const width = 1000;
         const height = 1000;
-        const rectSize = 100;
+        const rectWidth = 100;
+        const rectHeight = 50;
 
         //データをツリー形式に変換する。この時ノードの相対位置とかも決まる。
 
@@ -98,8 +99,8 @@ class BookTree extends Component {
             .attr("class", "link")
             //描画領域の詳細
             .attr("d", function (d) {
-                return "M" + (d.y + rectSize / 2) + "," + (d.x + rectSize / 2) +
-                    "L" + (d.parent.y + rectSize / 2) + "," + (d.parent.x + rectSize / 2);
+                return "M" + (d.y + rectWidth / 2) + "," + (d.x + rectHeight) +
+                    "L" + (d.parent.y + rectWidth / 2) + "," + (d.parent.x + rectHeight);
             });
 
         //ノードを描画する
@@ -137,31 +138,31 @@ class BookTree extends Component {
         node.append("rect")
         //半径を設定
             .attr("class", "rect")
-            .attr("width", rectSize)
-            .attr("height", rectSize / 2)
+            .attr("width", rectWidth)
+            .attr("height", rectHeight)
             .attr("stroke", "#000")
             //色を設定
             .attr("fill", "#fff")
-            .attr("y", rectSize / 4);
+            .attr("y", rectHeight / 4);
 
         //ノードに文字を追加する
         let text = node.append("text")
         //文字を書く場所
         //文字のサイズ
             .attr("font-size", "15")
-            .attr("text-anchor", "middle");
+            .attr("text-anchor", "start");
 
         //描画する文字
         //IDを表示
         text.append("tspan")
-            .attr("y", rectSize * 0.9 / 2)
+            .attr("y", rectWidth * 0.9 / 2)
             .text(function (d) {
                 return d.data.name;
             });
 
         //内容を表示
         text.append("tspan")
-            .attr("y", 15 + rectSize * 0.9 / 2)
+            .attr("y", 20 + rectWidth * 0.9 / 2)
             .text(function (d) {
                 if (d.data.type === "book") {
                     return d.data.isbn;
