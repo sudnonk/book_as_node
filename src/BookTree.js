@@ -143,6 +143,7 @@ class BookTree extends Component {
             .attr("stroke", "#000")
             //色を設定
             .attr("fill", "#fff")
+            .attr("x", rectWidth / 2)
             .attr("y", rectHeight / 4);
 
         //ノードに文字を追加する
