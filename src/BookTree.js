@@ -155,6 +155,7 @@ class BookTree extends Component {
 
     render() {
         const _self = this;
+        console.log(_self.state.selected);
 
         //Reactが生成したDOMを、this.nodeに入れる
         return (
